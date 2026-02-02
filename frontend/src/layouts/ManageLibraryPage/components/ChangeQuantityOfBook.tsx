@@ -28,7 +28,7 @@ export const ChangeQuantityOfBook: React.FC<{ book: BookModel, deleteBook: any }
         
         setIsLoading(true);
         try {
-            const url = `http://localhost:8080/api/admin/secure/increase/book/quantity?bookId=${props.book?.id}`;
+            const url = `/api/admin/secure/increase/book/quantity?bookId=${props.book?.id}`;
             const requestOptions = {
                 method: 'PUT',
                 headers: {

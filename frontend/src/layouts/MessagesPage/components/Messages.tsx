@@ -17,7 +17,7 @@ export const Messages = () => {
     useEffect(() => {
         const fetchUserMessages = async () => {
             try {
-                const url = `http://localhost:8080/api/messages/secure/user?page=${currentPage - 1}&size=${messagesPerPage}`;
+                const url = `/api/messages/secure/user?page=${currentPage - 1}&size=${messagesPerPage}`;
                 const requestOptions = {
                     method: 'GET',
                     headers: {

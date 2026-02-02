@@ -33,7 +33,7 @@ export const AddNewBook = () => {
     }
 
     async function submitNewBook() {
-        const url = `http://localhost:8080/api/admin/secure/add/book`;
+        const url = `/api/admin/secure/add/book`;
 
         if (title && author && category !== 'Category' && description && copies >= 0) {
             setIsLoading(true);

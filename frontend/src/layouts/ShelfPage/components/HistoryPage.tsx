@@ -37,7 +37,7 @@ export const HistoryPage = () => {
             }
 
             try {
-                const url = `http://localhost:8080/api/histories/search/findBooksByUserEmail?userEmail=${encodeURIComponent(userEmail)}&page=${currentPage - 1}&size=5`;
+                const url = `/api/histories/search/findBooksByUserEmail?userEmail=${encodeURIComponent(userEmail)}&page=${currentPage - 1}&size=5`;
                 const requestOptions = {
                     method: 'GET',
                     headers: {

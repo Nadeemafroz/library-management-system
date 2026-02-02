@@ -25,7 +25,7 @@ export const Loans = () => {
             }
 
             try {
-                const url = `http://localhost:8080/api/books/secure/currentloans`;
+                const url = `/api/books/secure/currentloans`;
                 const requestOptions = {
                     method: 'GET',
                     headers: {
