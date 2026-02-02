@@ -19,7 +19,7 @@ export const SearchBooksPage = () => {
 
     useEffect(() => {
         const fetchBooks = async () => {
-            const baseUrl: string = "13.126.20.173:8080/api/books";
+            const baseUrl: string = "13.126.20.173:8080/books";
 
             let url: string = '';
 
