@@ -32,7 +32,7 @@ const Login: React.FC = () => {
           throw new Error("Passwords don't match");
         }
 
-        // const response = await axios.post('http://localhost:8080/api/auth/register', {
+        // const response = await axios.post('/api/auth/register', {
         //   email,
         //   password
         // });
@@ -40,7 +40,7 @@ const Login: React.FC = () => {
         setSuccess('Registration successful! Please login.');
         setActiveTab('login');
       } else {
-        const response = await axios.post('http://localhost:8080/api/auth/login', {
+        const response = await axios.post('/api/auth/login', {
           email,
           password
         });

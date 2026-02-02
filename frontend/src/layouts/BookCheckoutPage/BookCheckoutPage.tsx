@@ -66,7 +66,7 @@ export const BookCheckoutPage = () => {
     useEffect(() => {
         const fetchBookReviews = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/api/reviews/search/findByBookId?bookId=${bookId}`);
+                const response = await fetch(`/api/reviews/search/findByBookId?bookId=${bookId}`);
                 if (!response.ok) throw new Error("Something went wrong!");
 
                 const data = await response.json();
@@ -108,7 +108,7 @@ export const BookCheckoutPage = () => {
             if (!isAuthenticated || !token) return;
             try {
                 const response = await fetch(
-                    `http://localhost:8080/api/reviews/secure/user/book?bookId=${bookId}`,
+                    `/api/reviews/secure/user/book?bookId=${bookId}`,
                     {
                         method: "GET",
                         headers: {
@@ -134,7 +134,7 @@ export const BookCheckoutPage = () => {
             if (!isAuthenticated || !token) return;
             try {
                 const response = await fetch(
-                    `http://localhost:8080/api/books/secure/currentloans/count`,
+                    `/api/books/secure/currentloans/count`,
                     {
                         method: "GET",
                         headers: {
@@ -160,7 +160,7 @@ export const BookCheckoutPage = () => {
             if (!isAuthenticated || !token) return;
             try {
                 const response = await fetch(
-                    `http://localhost:8080/api/books/secure/ischeckedout/byuser?bookId=${bookId}`,
+                    `/api/books/secure/ischeckedout/byuser?bookId=${bookId}`,
                     {
                         method: "GET",
                         headers: {
@@ -199,7 +199,7 @@ export const BookCheckoutPage = () => {
 
         try {
             const response = await fetch(
-                `http://localhost:8080/api/books/secure/checkout?bookId=${book?.id}`,
+                `/api/books/secure/checkout?bookId=${book?.id}`,
                 {
                     method: "PUT",
                     headers: {
@@ -221,7 +221,7 @@ export const BookCheckoutPage = () => {
         const reviewRequest = new ReviewRequestModel(starInput, book.id, reviewDescription);
 
         try {
-            const response = await fetch(`http://localhost:8080/api/reviews/secure`, {
+            const response = await fetch(`/api/reviews/secure`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
