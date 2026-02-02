@@ -38,7 +38,7 @@ export const BookCheckoutPage = () => {
     useEffect(() => {
         const fetchBook = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/api/books/${bookId}`);
+                const response = await fetch(`/api/books/${bookId}`);
                 if (!response.ok) throw new Error("Something went wrong!");
 
                 const data = await response.json();
