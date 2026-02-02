@@ -19,7 +19,7 @@ export const SearchBooksPage = () => {
 
     useEffect(() => {
         const fetchBooks = async () => {
-            const baseUrl: string = "http://13.126.20.173:8080/books";
+            const baseUrl: string = "https://api.nadeem.sbs/books";
 
             let url: string = '';
 
