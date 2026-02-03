@@ -27,6 +27,7 @@ export const HistoryPage = () => {
 
     useEffect(() => {
         const fetchUserHistory = async () => {
+            console.log("method execution started");
             const token = localStorage.getItem('token');
             const userEmail = getEmailFromToken();
             
@@ -47,6 +48,7 @@ export const HistoryPage = () => {
                 };
                 
                 const historyResponse = await fetch(url, requestOptions);
+                console.log("this is working");
                 
                 if (!historyResponse.ok) {
                     if (historyResponse.status === 401) {
