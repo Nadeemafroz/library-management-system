@@ -54,6 +54,7 @@ export const Loans = () => {
     }, [checkout]);
 
     async function returnBook(bookId: number) {
+        console.log("return function started");
         const token = getJwtToken();
         if (!token) {
             setHttpError('Authentication required');
@@ -70,6 +71,7 @@ export const Loans = () => {
                 }
             };
             const returnResponse = await fetch(url, requestOptions);
+            console.log(returnResponse);
             
             if (!returnResponse.ok) {
                 if (returnResponse.status === 401) {
