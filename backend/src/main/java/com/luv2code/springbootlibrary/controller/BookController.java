@@ -3,7 +3,12 @@ package com.luv2code.springbootlibrary.controller;
 import com.luv2code.springbootlibrary.entity.Book;
 import com.luv2code.springbootlibrary.responsemodels.ShelfCurrentLoansResponse;
 import com.luv2code.springbootlibrary.service.BookService;
+
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,11 +60,26 @@ public class BookController {
     }
 
     @PutMapping("/secure/return")
-    public void returnBook(Authentication authentication,
-                           @RequestParam Long bookId) throws Exception {
-        String userEmail = authentication.getName();
-        bookService.returnBook(userEmail, bookId);
+public ResponseEntity<?> returnBook(
+        @RequestParam Long bookId,
+        HttpServletRequest request) {
+
+    String email = jwtUtil.getEmailFromRequest(request);
+
+    if (email == null) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
+
+    boolean returned = bookService.returnBook(email, bookId);
+
+    if (!returned) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body("Book not checked out by user");
+    }
+
+    return ResponseEntity.ok().build();
+}
 
     @PutMapping("/secure/renew/loan")
     public void renewLoan(Authentication authentication,
