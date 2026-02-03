@@ -66,7 +66,7 @@ export const BookCheckoutPage = () => {
     useEffect(() => {
         const fetchBookReviews = async () => {
             try {
-                const response = await fetch(`https://api.nadeem.sbs/api/reviews/search/findByBookId?bookId=${bookId}`);
+                const response = await fetch(`https://api.nadeem.sbs/reviews/search/findByBookId?bookId=${bookId}`);
                 if (!response.ok) throw new Error("Something went wrong!");
 
                 const data = await response.json();
