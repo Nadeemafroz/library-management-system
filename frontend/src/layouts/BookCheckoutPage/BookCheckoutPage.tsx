@@ -199,7 +199,7 @@ export const BookCheckoutPage = () => {
 
         try {
             const response = await fetch(
-                `/api/books/secure/checkout?bookId=${book?.id}`,
+                `https://api.nadeem.sbs/api/books/secure/checkout?bookId=${book?.id}`,
                 {
                     method: "PUT",
                     headers: {
@@ -221,7 +221,7 @@ export const BookCheckoutPage = () => {
         const reviewRequest = new ReviewRequestModel(starInput, book.id, reviewDescription);
 
         try {
-            const response = await fetch(`/api/reviews/secure`, {
+            const response = await fetch(`https://api.nadeem.sbs/api/reviews/secure`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
