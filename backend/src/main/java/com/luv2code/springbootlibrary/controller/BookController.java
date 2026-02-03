@@ -59,18 +59,14 @@ public class BookController {
         return bookService.checkoutBook(userEmail, bookId);
     }
 
-    @PutMapping("/secure/return")
+@PutMapping("/secure/return")
 public ResponseEntity<?> returnBook(
-        @RequestParam Long bookId,
-        HttpServletRequest request) {
+        Authentication authentication,
+        @RequestParam Long bookId) {
 
-    String email = jwtUtil.getEmailFromRequest(request);
+    String userEmail = authentication.getName();
 
-    if (email == null) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-    }
-
-    boolean returned = bookService.returnBook(email, bookId);
+    boolean returned = bookService.returnBook(userEmail, bookId);
 
     if (!returned) {
         return ResponseEntity
@@ -80,6 +76,7 @@ public ResponseEntity<?> returnBook(
 
     return ResponseEntity.ok().build();
 }
+
 
     @PutMapping("/secure/renew/loan")
     public void renewLoan(Authentication authentication,
