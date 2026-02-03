@@ -77,7 +77,8 @@ export const Loans = () => {
                 if (returnResponse.status === 401) {
                     throw new Error('Unauthorized - Please login again');
                 }
-                throw new Error('Something went wrong!');
+                console.log("here it ir getting stuck");
+                throw new Error('Something went wrong! stuck');
             }
             
             setCheckout(!checkout);
