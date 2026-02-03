@@ -1,56 +1,73 @@
-import React, { useState, FormEvent, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Form, Button, Container, Row, Col, Card, Alert, Tabs, Tab } from 'react-bootstrap';
-import axios from 'axios';
-import { useAuth } from '../context/AuthContext'; // 👈 Adjust this path if needed
+import React, { useState, FormEvent, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Form, Button, Container, Row, Col, Card, Alert, Tabs, Tab } from "react-bootstrap";
+import { useAuth } from "../context/AuthContext";
+
+const BASE_URL = "https://api.nadeem.sbs";
 
 const Login: React.FC = () => {
-  const { login } = useAuth(); // 👈 use context login
-  const [activeTab, setActiveTab] = useState<'login' | 'register'>('login');
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [confirmPassword, setConfirmPassword] = useState<string>('');
-  const [error, setError] = useState<string>('');
-  const [success, setSuccess] = useState<string>('');
+  const { login } = useAuth();
+  const [activeTab, setActiveTab] = useState<"login" | "register">("login");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      navigate('/'); // Redirect if already logged in
-    }
+    const token = localStorage.getItem("token");
+    if (token) navigate("/");
   }, [navigate]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setError('');
-    setSuccess('');
+    setError("");
+    setSuccess("");
 
     try {
-      if (activeTab === 'register') {
+      if (activeTab === "register") {
         if (password !== confirmPassword) {
-          throw new Error("Passwords don't match");
+          throw new Error("Passwords do not match");
         }
 
-        // const response = await axios.post('/api/auth/register', {
-        //   email,
-        //   password
-        // });
-
-        setSuccess('Registration successful! Please login.');
-        setActiveTab('login');
-      } else {
-        const response = await axios.post('/api/auth/login', {
-          email,
-          password
+        const response = await fetch(`${BASE_URL}/api/auth/register`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
         });
 
-        const token = response.data;
-        login(token); // 👈 update context
-        navigate('/');
+        if (!response.ok) {
+          const msg = await response.text();
+          throw new Error(msg || "Registration failed");
+        }
+
+        setSuccess("Registration successful. Please login.");
+        setActiveTab("login");
+        setPassword("");
+        setConfirmPassword("");
+      } else {
+        const response = await fetch(`${BASE_URL}/api/auth/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        });
+
+        if (!response.ok) {
+          const msg = await response.text();
+          throw new Error(msg || "Login failed");
+        }
+
+        const token = await response.text();
+        login(token);
+        navigate("/");
       }
     } catch (err: any) {
-      setError(err.response?.data?.message || err.message || 'An error occurred');
+      setError(err.message || "Something went wrong");
     }
   };
 
@@ -63,9 +80,9 @@ const Login: React.FC = () => {
               <Tabs
                 activeKey={activeTab}
                 onSelect={(k) => {
-                  setActiveTab(k as 'login' | 'register');
-                  setError('');
-                  setSuccess('');
+                  setActiveTab(k as "login" | "register");
+                  setError("");
+                  setSuccess("");
                 }}
                 className="mb-3"
               >
@@ -75,10 +92,9 @@ const Login: React.FC = () => {
                     {success && <Alert variant="success">{success}</Alert>}
 
                     <Form.Group className="mb-3">
-                      <Form.Label>Email address</Form.Label>
+                      <Form.Label>Email</Form.Label>
                       <Form.Control
                         type="email"
-                        placeholder="Enter email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
@@ -89,14 +105,13 @@ const Login: React.FC = () => {
                       <Form.Label>Password</Form.Label>
                       <Form.Control
                         type="password"
-                        placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                       />
                     </Form.Group>
 
-                    <Button variant="primary" type="submit">
+                    <Button type="submit" variant="primary">
                       Login
                     </Button>
                   </Form>
@@ -107,10 +122,9 @@ const Login: React.FC = () => {
                     {error && <Alert variant="danger">{error}</Alert>}
 
                     <Form.Group className="mb-3">
-                      <Form.Label>Email address</Form.Label>
+                      <Form.Label>Email</Form.Label>
                       <Form.Control
                         type="email"
-                        placeholder="Enter email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
@@ -121,7 +135,6 @@ const Login: React.FC = () => {
                       <Form.Label>Password</Form.Label>
                       <Form.Control
                         type="password"
-                        placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
@@ -132,14 +145,13 @@ const Login: React.FC = () => {
                       <Form.Label>Confirm Password</Form.Label>
                       <Form.Control
                         type="password"
-                        placeholder="Confirm Password"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         required
                       />
                     </Form.Group>
 
-                    <Button variant="primary" type="submit">
+                    <Button type="submit" variant="primary">
                       Register
                     </Button>
                   </Form>
