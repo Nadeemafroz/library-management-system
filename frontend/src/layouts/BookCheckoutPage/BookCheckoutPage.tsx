@@ -105,7 +105,10 @@ export const BookCheckoutPage = () => {
 
     useEffect(() => {
         const fetchUserReview = async () => {
-            if (!isAuthenticated || !token) return;
+            if (!isAuthenticated || !token) {
+                setIsLoadingUserReview(false);
+                return;
+            }
             try {
                 const response = await fetch(
                     `https://api.nadeem.sbs/api/reviews/secure/user/book?bookId=${bookId}`,
@@ -131,7 +134,10 @@ export const BookCheckoutPage = () => {
 
     useEffect(() => {
         const fetchCurrentLoansCount = async () => {
-            if (!isAuthenticated || !token) return;
+            if (!isAuthenticated || !token) {
+                setIsLoadingCurrentLoansCount(false);
+                return;
+            }
             try {
                 const response = await fetch(
                     `https://api.nadeem.sbs/api/books/secure/currentloans/count`,
@@ -157,7 +163,10 @@ export const BookCheckoutPage = () => {
 
     useEffect(() => {
         const fetchBookCheckedOutStatus = async () => {
-            if (!isAuthenticated || !token) return;
+            if (!isAuthenticated || !token) {
+                setIsLoadingBookCheckedOut(false);
+                return;
+            }
             try {
                 const response = await fetch(
                     `https://api.nadeem.sbs/api/books/secure/ischeckedout/byuser?bookId=${bookId}`,
@@ -181,10 +190,10 @@ export const BookCheckoutPage = () => {
         fetchBookCheckedOutStatus();
     }, [isAuthenticated]);
 
-    if (isLoading || isLoadingReview || isLoadingCurrentLoansCount || isLoadingBookCheckedOut || isLoadingUserReview) {
-        return <SpinnerLoading />;
+    // if (isLoading || isLoadingReview || isLoadingCurrentLoansCount || isLoadingBookCheckedOut || isLoadingUserReview) {
+    //     return <SpinnerLoading />;
         
-    }
+    // }
 
     if (httpError) {
         return (
@@ -286,6 +295,8 @@ export const BookCheckoutPage = () => {
                             src={bookImage}
                             width="226"
                             height="349"
+
+
                             alt="Book"
                         />
                     )}
