@@ -52,7 +52,7 @@ export const HistoryPage = () => {
                     if (historyResponse.status === 401) {
                         throw new Error('Unauthorized - Please login again');
                     }
-                    throw new Error('Something went wrong!');
+                    throw new Error('Something went wrong! here is the error');
                 }
                 
                 const historyResponseJson = await historyResponse.json();
