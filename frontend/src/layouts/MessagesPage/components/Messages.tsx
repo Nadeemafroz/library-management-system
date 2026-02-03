@@ -17,7 +17,7 @@ export const Messages = () => {
     useEffect(() => {
         const fetchUserMessages = async () => {
             try {
-                const url = `/api/messages/secure/user?page=${currentPage - 1}&size=${messagesPerPage}`;
+                const url = `https://api.nadeem.sbs/api/messages/secure/user?page=${currentPage - 1}&size=${messagesPerPage}`;
                 const requestOptions = {
                     method: 'GET',
                     headers: {

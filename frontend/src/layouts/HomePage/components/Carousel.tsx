@@ -12,7 +12,7 @@ export const Carousel = () => {
 
     useEffect(() => {
         const fetchBooks = async () => {
-            const baseUrl: string = "/api/books";
+            const baseUrl: string = "https://api.nadeem.sbs/api/books";
 
             const url: string = `${baseUrl}?page=0&size=9`;
 

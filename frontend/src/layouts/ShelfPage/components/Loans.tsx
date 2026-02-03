@@ -25,7 +25,7 @@ export const Loans = () => {
             }
 
             try {
-                const url = `/api/books/secure/currentloans`;
+                const url = `https://api.nadeem.sbs/api/books/secure/currentloans`;
                 const requestOptions = {
                     method: 'GET',
                     headers: {
@@ -61,7 +61,7 @@ export const Loans = () => {
         }
 
         try {
-            const url = `http://localhost:8080/api/books/secure/return?bookId=${bookId}`;
+            const url = `https://api.nadeem.sbs/api/books/secure/return?bookId=${bookId}`;
             const requestOptions = {
                 method: 'PUT',
                 headers: {
@@ -93,7 +93,7 @@ export const Loans = () => {
         }
 
         try {
-            const url = `http://localhost:8080/api/books/secure/renew/loan?bookId=${bookId}`;
+            const url = `https://api.nadeem.sbs/api/books/secure/renew/loan?bookId=${bookId}`;
             const requestOptions = {
                 method: 'PUT',
                 headers: {

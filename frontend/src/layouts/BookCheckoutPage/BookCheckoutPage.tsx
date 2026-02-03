@@ -38,7 +38,7 @@ export const BookCheckoutPage = () => {
     useEffect(() => {
         const fetchBook = async () => {
             try {
-                const response = await fetch(`/api/books/${bookId}`);
+                const response = await fetch(`https://api.nadeem.sbs/api/books/${bookId}`);
                 if (!response.ok) throw new Error("Something went wrong!");
 
                 const data = await response.json();
@@ -66,7 +66,7 @@ export const BookCheckoutPage = () => {
     useEffect(() => {
         const fetchBookReviews = async () => {
             try {
-                const response = await fetch(`/api/reviews/search/findByBookId?bookId=${bookId}`);
+                const response = await fetch(`https://api.nadeem.sbs/api/reviews/search/findByBookId?bookId=${bookId}`);
                 if (!response.ok) throw new Error("Something went wrong!");
 
                 const data = await response.json();
@@ -108,7 +108,7 @@ export const BookCheckoutPage = () => {
             if (!isAuthenticated || !token) return;
             try {
                 const response = await fetch(
-                    `/api/reviews/secure/user/book?bookId=${bookId}`,
+                    `https://api.nadeem.sbs/api/reviews/secure/user/book?bookId=${bookId}`,
                     {
                         method: "GET",
                         headers: {
@@ -134,7 +134,7 @@ export const BookCheckoutPage = () => {
             if (!isAuthenticated || !token) return;
             try {
                 const response = await fetch(
-                    `/api/books/secure/currentloans/count`,
+                    `https://api.nadeem.sbs/api/books/secure/currentloans/count`,
                     {
                         method: "GET",
                         headers: {
@@ -160,7 +160,7 @@ export const BookCheckoutPage = () => {
             if (!isAuthenticated || !token) return;
             try {
                 const response = await fetch(
-                    `/api/books/secure/ischeckedout/byuser?bookId=${bookId}`,
+                    `https://api.nadeem.sbs/api/books/secure/ischeckedout/byuser?bookId=${bookId}`,
                     {
                         method: "GET",
                         headers: {
