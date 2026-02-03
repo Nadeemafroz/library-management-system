@@ -7,6 +7,8 @@ import com.luv2code.springbootlibrary.requestmodels.LoginRequest;
 import com.luv2code.springbootlibrary.requestmodels.RegisterRequest;
 import com.luv2code.springbootlibrary.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,19 +37,26 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequest loginRequest) {
-        Optional<User> userOptional = userRepository.findByEmail(loginRequest.getEmail());
+public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
 
-        if (userOptional.isEmpty()) {
-            throw new RuntimeException("Invalid credentials");
-        }
+    Optional<User> userOptional = userRepository.findByEmail(loginRequest.getEmail());
 
-        User user = userOptional.get();
-
-        if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
-            throw new RuntimeException("Invalid credentials");
-        }
-
-        return jwtUtil.generateToken(user.getEmail(), user.getRole());
+    if (userOptional.isEmpty()) {
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body("Invalid email or password");
     }
+
+    User user = userOptional.get();
+
+    if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body("Invalid email or password");
+    }
+
+    String token = jwtUtil.generateToken(user.getEmail(), user.getRole());
+    return ResponseEntity.ok(token);
+}
+
 }
