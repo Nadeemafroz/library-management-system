@@ -77,6 +77,9 @@ export const Loans = () => {
                 if (returnResponse.status === 401) {
                     throw new Error('Unauthorized - Please login again');
                 }
+                const text = await returnResponse.text();
+                
+                console.log("body:", text);
                 console.log("here it ir getting stuck");
                 throw new Error('Something went wrong! stuck');
             }
