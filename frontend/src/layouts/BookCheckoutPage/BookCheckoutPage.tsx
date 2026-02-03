@@ -190,10 +190,10 @@ export const BookCheckoutPage = () => {
         fetchBookCheckedOutStatus();
     }, [isAuthenticated]);
 
-    // if (isLoading || isLoadingReview || isLoadingCurrentLoansCount || isLoadingBookCheckedOut || isLoadingUserReview) {
-    //     return <SpinnerLoading />;
+    if (isLoading || isLoadingReview || isLoadingCurrentLoansCount || isLoadingBookCheckedOut || isLoadingUserReview) {
+        return <SpinnerLoading />;
         
-    // }
+    }
 
     if (httpError) {
         return (
