@@ -38,7 +38,7 @@ export const HistoryPage = () => {
             }
 
             try {
-                const url = `https://api.nadeem.sbs/api/histories/search/findBooksByUserEmail?userEmail=${encodeURIComponent(userEmail)}&page=${currentPage - 1}&size=5`;
+                const url = `https://api.nadeem.sbs/histories/search/findBooksByUserEmail?userEmail=${encodeURIComponent(userEmail)}&page=${currentPage - 1}&size=5`;
                 const requestOptions = {
                     method: 'GET',
                     headers: {
