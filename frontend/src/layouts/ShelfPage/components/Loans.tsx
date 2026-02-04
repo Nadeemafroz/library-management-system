@@ -185,7 +185,7 @@ export const Loans = () => {
                                                     data-bs-target={`#modal${shelfCurrentLoan.book.id}`}>
                                                         Manage Loan
                                                 </button>
-                                                <Link to={'search'} className='list-group-item list-group-item-action'>
+                                                <Link to={'/search'} className='list-group-item list-group-item-action'>
                                                     Search more books?
                                                 </Link>
                                             </div>
@@ -210,7 +210,7 @@ export const Loans = () => {
                     <h3 className='mt-3'>
                         Currently no loans
                     </h3>
-                    <Link className='btn btn-primary' to={`search`}>
+                    <Link className='btn btn-primary' to={`/search`}>
                         Search for a new book
                     </Link>
                 </>
@@ -258,7 +258,7 @@ export const Loans = () => {
                                                     data-bs-target={`#mobilemodal${shelfCurrentLoan.book.id}`}>
                                                         Manage Loan
                                                 </button>
-                                                <Link to={'search'} className='list-group-item list-group-item-action'>
+                                                <Link to={'/search'} className='list-group-item list-group-item-action'>
                                                     Search more books?
                                                 </Link>
                                             </div>
@@ -283,7 +283,7 @@ export const Loans = () => {
                     <h3 className='mt-3'>
                         Currently no loans
                     </h3>
-                    <Link className='btn btn-primary' to={`search`}>
+                    <Link className='btn btn-primary' to={`/search`}>
                         Search for a new book
                     </Link>
                 </>
