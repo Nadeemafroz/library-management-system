@@ -10,7 +10,7 @@ export const PostNewMessage = () => {
     const [displaySuccess, setDisplaySuccess] = useState(false);
 
     async function submitNewQuestion() {
-        const url = `https://api.nadeem.sbs/api/messages/secure/add/message`;
+        const url = `http://13.127.63.213:8080/api/messages/secure/add/message`;
 
         if (token && title.trim() !== '' && question.trim() !== '') {
             const messageRequestModel = new MessageModel(title, question);
