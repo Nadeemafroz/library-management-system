@@ -38,7 +38,7 @@ export const BookCheckoutPage = () => {
     useEffect(() => {
         const fetchBook = async () => {
             try {
-                const response = await fetch(`https://api.nadeem.sbs/books/${bookId}`);
+                const response = await fetch(`http://13.127.63.213:8080/books/${bookId}`);
                 if (!response.ok) throw new Error("Something went wrong!");
 
                 const data = await response.json();
@@ -66,7 +66,7 @@ export const BookCheckoutPage = () => {
     useEffect(() => {
         const fetchBookReviews = async () => {
             try {
-                const response = await fetch(`https://api.nadeem.sbs/reviews/search/findByBookId?bookId=${bookId}`);
+                const response = await fetch(`http://13.127.63.213:8080/reviews/search/findByBookId?bookId=${bookId}`);
                 if (!response.ok) throw new Error("Something went wrong!");
 
                 const data = await response.json();
@@ -111,7 +111,7 @@ export const BookCheckoutPage = () => {
             }
             try {
                 const response = await fetch(
-                    `https://api.nadeem.sbs/api/reviews/secure/user/book?bookId=${bookId}`,
+                    `http://13.127.63.213:8080/api/reviews/secure/user/book?bookId=${bookId}`,
                     {
                         method: "GET",
                         headers: {
@@ -140,7 +140,7 @@ export const BookCheckoutPage = () => {
             }
             try {
                 const response = await fetch(
-                    `https://api.nadeem.sbs/api/books/secure/currentloans/count`,
+                    `http://13.127.63.213:8080/api/books/secure/currentloans/count`,
                     {
                         method: "GET",
                         headers: {
@@ -169,7 +169,7 @@ export const BookCheckoutPage = () => {
             }
             try {
                 const response = await fetch(
-                    `https://api.nadeem.sbs/api/books/secure/ischeckedout/byuser?bookId=${bookId}`,
+                    `http://13.127.63.213:8080/api/books/secure/ischeckedout/byuser?bookId=${bookId}`,
                     {
                         method: "GET",
                         headers: {
@@ -208,7 +208,7 @@ export const BookCheckoutPage = () => {
 
         try {
             const response = await fetch(
-                `https://api.nadeem.sbs/api/books/secure/checkout?bookId=${book?.id}`,
+                `http://13.127.63.213:8080/api/books/secure/checkout?bookId=${book?.id}`,
                 {
                     method: "PUT",
                     headers: {
@@ -230,7 +230,7 @@ export const BookCheckoutPage = () => {
         const reviewRequest = new ReviewRequestModel(starInput, book.id, reviewDescription);
 
         try {
-            const response = await fetch(`https://api.nadeem.sbs/api/reviews/secure`, {
+            const response = await fetch(`http://13.127.63.213:8080/api/reviews/secure`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
