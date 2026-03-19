@@ -33,7 +33,7 @@ export const AddNewBook = () => {
     }
 
     async function submitNewBook() {
-        const url = `https://api.nadeem.sbs/api/admin/secure/add/book`;
+        const url = `http://13.127.63.213:8080/api/admin/secure/add/book`;
 
         if (title && author && category !== 'Category' && description && copies >= 0) {
             setIsLoading(true);
