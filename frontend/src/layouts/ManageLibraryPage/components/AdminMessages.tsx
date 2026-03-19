@@ -20,7 +20,7 @@ export const AdminMessages = () => {
 
     useEffect(() => {
         const fetchUserMessages = async () => {
-            const url = `https://api.nadeem.sbs/api/messages/search/findByClosed?closed=false&page=${currentPage - 1}&size=${messagesPerPage}`;
+            const url = `http://13.127.63.213:8080/api/messages/search/findByClosed?closed=false&page=${currentPage - 1}&size=${messagesPerPage}`;
             const requestOptions = {
                 method: 'GET',
                 headers: {
@@ -51,7 +51,7 @@ export const AdminMessages = () => {
 
     async function submitResponseToQuestion(id: number, response: string) {
         if (id && response.trim() !== '') {
-            const url = `https://api.nadeem.sbs/api/messages/secure/admin/message`;
+            const url = `http://13.127.63.213:8080/api/messages/secure/admin/message`;
             try {
                 const requestModel = new AdminMessageRequest(id, response);
                 const requestOptions = {
