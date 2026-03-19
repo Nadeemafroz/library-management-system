@@ -19,7 +19,7 @@ export const ChangeQuantityOfBooks = () => {
 
     useEffect(() => {
         const fetchBooks = async () => {
-            const baseUrl: string = `https://api.nadeem.sbs/api/books?page=${currentPage - 1}&size=${booksPerPage}`;
+            const baseUrl: string = `http://13.127.63.213:8080/api/books?page=${currentPage - 1}&size=${booksPerPage}`;
 
             const response = await fetch(baseUrl);
 
