@@ -34,7 +34,7 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
 
         // Configure CORS Mapping - updated approach
         cors.addMapping(config.getBasePath() + "/**")
-                .allowedOrigins(theAllowedOrigins)
+                .allowedOriginPatterns(theAllowedOrigins)
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);
