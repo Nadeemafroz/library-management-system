@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Form, Button, Container, Row, Col, Card, Alert, Tabs, Tab } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
 
-const BASE_URL = "https://api.nadeem.sbs";
+const BASE_URL = "http://13.127.63.213:8080";
 
 const Login: React.FC = () => {
   const { login } = useAuth();
